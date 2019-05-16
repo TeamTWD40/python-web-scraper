@@ -6,7 +6,8 @@ import urllib.request
 import os
 
 # mongodb://root:pass@localhost:27017/
-MONGO_URI = 'mongodb://' + os.environ['DB_USERNAME'] + ':' + os.environ['DB_PASSWORD'] + '@' + os.environ['DB_URL'] + ':' + os.environ['DB_PORT']
+MONGO_URI = 'mongodb://' + os.environ['DB_USERNAME'] + ':' + os.environ['DB_PASSWORD'] + '@' + os.environ['DB_URL']
+print(MONGO_URI)
 client = MongoClient(MONGO_URI)
 db = client.ticker_scrape
 serverStatusResult = db.command("serverStatus")
