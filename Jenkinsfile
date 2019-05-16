@@ -11,7 +11,7 @@ node('master') {
       def healthcheckPath = getPath(appComponent)
       def ocpHost='https://ocp.twdaws.net' //Enter the same value as in the cloudformation parameter
       def region = 'us-east-1'
-      def appName = 'rails-news-api'
+      def appName = 'python-web-scraper'
       def nodePort = getNodePort(BRANCH_NAME)
       def containerPort = getContainerPort(BRANCH_NAME)
       TAG = "twd-demo-${BRANCH_NAME}/${appName}:${BUILD_NUMBER}"
