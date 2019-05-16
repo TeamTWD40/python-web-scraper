@@ -7,7 +7,7 @@ WORKDIR /home/scraper
 COPY . /home/scraper
 
 RUN pip install -r requirements.txt
-
+ENV FLASK_RUN_PORT=8082
 ENTRYPOINT [ "python" ]
-
+EXPOSE 8082
 CMD [ "app.py" ]
