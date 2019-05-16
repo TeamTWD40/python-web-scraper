@@ -3,8 +3,12 @@ from bs4.element import Comment
 from pymongo import MongoClient
 from pprint import pprint
 import urllib.request
+import os
 
-client = MongoClient('localhost')
+# mongodb://root:pass@localhost:27017/
+os.environ['HOME']
+MONGO_URI = 'mongodb://' + os.environ['DB_USERNAME'] + ':' + os.environ['DB_PASSWORD'] + '@' + os.environ['DB_URL'] + ':' + os.environ['DB_PORT']
+client = MongoClient(MONGO_URI)
 db = client.ticker_scrape
 serverStatusResult = db.command("serverStatus")
 
