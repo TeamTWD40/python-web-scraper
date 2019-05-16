@@ -4,13 +4,9 @@ from pymongo import MongoClient
 from pprint import pprint
 import urllib.request
 
-
-# connect to MongoDB, change the << MONGODB URL >> to reflect your own connection string
 client = MongoClient('localhost')
 db = client.ticker_scrape
-# Issue the serverStatus command and print the results
 serverStatusResult = db.command("serverStatus")
-# pprint(serverStatusResult)
 
 def scrape_url(symbol, url):
     html = urllib.request.urlopen(url).read()
