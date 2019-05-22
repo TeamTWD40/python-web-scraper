@@ -1,4 +1,5 @@
 from flask import Flask
+from flask import jsonify
 
 import scraper
 
@@ -9,9 +10,8 @@ def index():
     return 'Server Works!'
 
 @app.route('/actuator/health')
-def health():
-    up = { 'status': 'up' }
-    return up
+def healthCheck():
+    return jsonify(status="up")
 
 @app.route('/scrape/<ticker>')
 def scrape_url(ticker):

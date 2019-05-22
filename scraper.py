@@ -6,9 +6,14 @@ import urllib.request
 import os
 
 # mongodb://root:pass@localhost:27017/
-MONGO_URI = 'mongodb://' + os.environ['DB_USERNAME'] + ':' + os.environ['DB_PASSWORD'] + '@' + os.environ['DB_URL'] + ':' + os.environ['DB_PORT'] + '/?ssl=true&ssl_ca_certs=rds-combined-ca-bundle.pem&replicaSet=rs0'
-print(MONGO_URI)
-client = MongoClient(MONGO_URI)
+client = None
+if 'DB_USERNAME' in os.environ:
+    MONGO_URI = 'mongodb://' + os.environ['DB_USERNAME'] + ':' + os.environ['DB_PASSWORD'] + '@' + os.environ['DB_URL'] + ':' + os.environ['DB_PORT']
+    client = MongoClient(MONGO_URI, ssl=True, ssl_certfile='rds-combined-ca-bundle.pem', replicaset='rs0')
+else:
+    MONGO_URI = 'mongodb://localhost:27017/scrape'
+    client = MongoClient(MONGO_URI)
+
 db = client.ticker_scrape
 serverStatusResult = db.command("serverStatus")
 
@@ -17,7 +22,7 @@ def scrape_url(symbol, url):
     text = text_from_html(html)
     result = db.reviews.insert_one(build_datastructure(symbol, url, text))
     print('Inserted scraped text for symbol {0}. ID: {1}'.format(symbol,result.inserted_id))
-    return 'success'
+    return 'success: ' + text
 
 def build_datastructure(symbol, url, text):
     company = {
