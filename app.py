@@ -5,6 +5,7 @@ import scraper
 
 app = Flask(__name__)
 
+# asdf
 @app.route('/')
 def index():
     return 'Server Works!'
