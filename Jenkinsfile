@@ -1,10 +1,10 @@
 #!/usr/bin/env groovy
 node('master') {
-  properties([disableConcurrentBuilds(), pipelineTriggers([githubPush()])])
-  
-  node {
-    git url: 'https://github.com/TeamTWD40/python-web-scraper.git', branch: 'dev'
-  }
+  properties([disableConcurrentBuilds()])
+  // , pipelineTriggers([githubPush()])
+  // node {
+  //   git url: 'https://github.com/TeamTWD40/python-web-scraper.git', branch: 'dev'
+  // }
   
   try {
       notifySlack('STARTED')
